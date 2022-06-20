@@ -1,0 +1,82 @@
+.view {
+  width: 100%;
+  overflow-x: auto;
+  background-color: white !important;
+  height: 400px !important;
+  overflow-y: auto;
+}
+
+.sticky-col {
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+#tom {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #fff;
+}
+
+
+.first-col {
+  left: 0px;
+  z-index: 0 !important;
+  background-color: white !important;
+}
+
+.first-col2 {
+  left: 0px;
+  z-index: 0 !important;
+}
+
+tfoot {
+  position: sticky;
+  inset-block-end: 0;
+  z-index: 0 !important;
+  background-color: white !important;
+  /* border-top: 2px solid rgb(29, 29, 155); */
+}
+
+/*  */
+
+.viewSalesSummary {
+  width: 100%;
+}
+
+.wrapperSalesSummary {
+  /* position: relative; */
+  overflow-x: auto;
+  /* white-space: nowrap; */
+  background-color: white !important;
+}
+
+.sticky-colSalesSummary {
+  position: -webkit-sticky;
+  position: sticky;
+
+}
+
+.coltm4 {
+  background-color: #313b3f !important;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.ak {
+  width: 1px !important;
+  background-color: white !important;
+}
+
+.first-colSalesSummary {
+  left: 0px;
+  z-index: 0 !important;
+  background-color: white !important;
+}
+
+.first-col2SalesSummary {
+  left: 0px;
+  z-index: 0 !important;
+}
