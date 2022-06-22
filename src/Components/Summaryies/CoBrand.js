@@ -1,12 +1,115 @@
 import React, { useState } from "react";
-import Chart from "react-apexcharts";
 import { CSVLink } from "react-csv";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import Loader from '../Loader'
-
+import Highcharts from "highcharts/highstock";
+import PieChart from "highcharts-react-official";
 
 function CoBrand({ isLoading, itemsCoBrand, CoBrandlabelHook, CoBrandValueHook }) {
+    const optionsMob = {
 
+        chart: {
+            innerHeight: 1000,
+            outerHeight: 1000,
+            innerWidth: 1000,
+            outerWidth: 1000,
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+
+        colors: ['#293462', '#216583', '#00818a', '#f7be16', '#454d66', '#009975', '#58b368', '#d9d872', '#ccc', '#aaa'],
+
+        title: {
+            text: 'CoBrand Wise Detail Report'
+        },
+
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
+
+        },
+        //colors: ['#25749a', '#ee6c01', '#ee6c01'],
+
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+
+                    style: {
+                        fontSize: '8px',
+                    },
+
+                },
+                showInLegend: false
+            },
+
+        },
+
+
+        series: [
+            {
+                name: 'Location',
+                data: CoBrandlabelHook
+            }],
+
+    };
+    const options = {
+
+        chart: {
+            innerHeight: 1000,
+            outerHeight: 1000,
+            innerWidth: 1000,
+            outerWidth: 1000,
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+
+        colors: ['#293462', '#216583', '#00818a', '#f7be16', '#454d66', '#009975', '#58b368', '#d9d872', '#ccc', '#aaa'],
+
+        title: {
+            text: 'CoBrand Wise Detail Report'
+        },
+
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
+
+        },
+        //colors: ['#25749a', '#ee6c01', '#ee6c01'],
+
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+
+                    style: {
+                        fontSize: '10px',
+                    },
+
+                },
+                showInLegend: false
+            },
+
+        },
+
+
+        series: [
+            {
+                name: 'Location',
+                data: CoBrandlabelHook
+            }],
+
+    };
 
     // Today
 
@@ -94,7 +197,7 @@ function CoBrand({ isLoading, itemsCoBrand, CoBrandlabelHook, CoBrandValueHook }
             <h4 className='mt-4'>CoBrand Summary</h4>
             <hr className="mx-1" />
 
-           <div className="dt-buttons btn-group " style={{marginTop:'20px'}}>
+            <div className="dt-buttons btn-group " style={{ marginTop: '20px' }}>
                 <button className="btn btn-secondary buttons-copy buttons-html5" tabIndex={0} aria-controls="DataTables_Table_0" onClick={copyTable}><span>Copy</span></button>
                 <CSVLink {...csvReport}>  <button className="btn btn-secondary buttons-csv buttons-html5" tabIndex={0} aria-controls="DataTables_Table_0"><span>CSV</span></button></CSVLink>
 
@@ -110,138 +213,110 @@ function CoBrand({ isLoading, itemsCoBrand, CoBrandlabelHook, CoBrandValueHook }
 
             </div>
             <div className='myTbl mt-5'>
-               
+
 
                 <div className="row">
                     <div className="col-md-12 col-sm-12" >
                         <div className="view">
-                           
-                                <table className="table  table-hover table-bordered" id="CoBrand-table-to-xls">
-                                    <thead id="tom">
-                                        <tr>
-                                            <th className="sticky-col first-col2 coltm4">CoBrand  Name</th>
 
-                                            <th className="coltm4">Today</th>
+                            <table className="table  table-hover table-bordered" id="CoBrand-table-to-xls">
+                                <thead id="tom">
+                                    <tr>
+                                        <th className="sticky-col first-col2 coltm4">CoBrand&nbsp;Name</th>
 
-                                            <th className="coltm4">Today Qty</th>
+                                        <th className="coltm4">Today</th>
 
-                                            <th className="coltm4">Yesterday</th>
+                                        <th className="coltm4">Today&nbsp;Qty</th>
 
-                                            <th className="coltm4">Yesterday Qty</th>
+                                        <th className="coltm4">Yesterday</th>
 
-                                            <th className="coltm4">Monthly</th>
+                                        <th className="coltm4">Yesterday&nbsp;Qty</th>
 
-                                            <th className="coltm4">Monthly Qty</th>
+                                        <th className="coltm4">Monthly</th>
 
-                                            <th className="coltm4">Previous Month</th>
+                                        <th className="coltm4">Monthly&nbsp;Qty</th>
 
-                                            <th className="coltm4">Previous Month Qty</th>
+                                        <th className="coltm4">Previous&nbsp;Month</th>
+
+                                        <th className="coltm4">Previous&nbsp;Month&nbsp;Qty</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="some" id="dome" style={{}}>
+
+                                    {itemsCoBrand.map((item, index) => (   //here we map through the items
+                                        <tr className='bg-white' key={index}>
+
+                                            <td className="sticky-col first-col">{item.coBrand}</td>
+
+
+                                            <td className="text-center ind">{(item.today).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+
+                                            <td className="text-center ind">{(item.todayQty).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+
+                                            <td className="text-center ind">{(item.yesterday).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+
+                                            <td className="text-center ind">{(item.yesterdayQty).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+
+                                            <td className="text-center ind">{(item.monthly).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+
+                                            <td className="text-center ind">{(item.monthlyQty).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+
+                                            <td className="text-center ind">{(item.previous).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+
+                                            <td className="text-center ind">{(item.previousQty).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+
+
+
+                                            {/* <td className="text-center ind">{item.reduce((acc, curr) => acc + curr.today, 0)}</td> */}
                                         </tr>
-                                    </thead>
-                                    <tbody className="some" id="dome" style={{}}>
-
-                                        {itemsCoBrand.map((item, index) => (   //here we map through the items
-                                            <tr className='bg-white' key={index}>
-
-                                                <td className="sticky-col first-col">{item.coBrand}</td>
-
-
-                                                <td className="text-center ind">{(item.today).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
-
-                                                <td className="text-center ind">{(item.todayQty).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
-
-                                                <td className="text-center ind">{(item.yesterday).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
-
-                                                <td className="text-center ind">{(item.yesterdayQty).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
-
-                                                <td className="text-center ind">{(item.monthly).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
-
-                                                <td className="text-center ind">{(item.monthlyQty).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
-
-                                                <td className="text-center ind">{(item.previous).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
-
-                                                <td className="text-center ind">{(item.previousQty).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                                    ))}
 
 
 
-                                                {/* <td className="text-center ind">{item.reduce((acc, curr) => acc + curr.today, 0)}</td> */}
-                                            </tr>
-                                        ))}
-                                    
-
-
-                                    </tbody>
-                                    <tfoot>
+                                </tbody>
+                                <tfoot>
                                     <tr >
-                                            <td className="sticky-col first-col" id="color">Total</td>
+                                        <td className="sticky-col first-col" id="color">Total</td>
 
-                                            <td id="color" style={{ textAlign: "center" }}>{(idSum).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                                        <td id="color" style={{ textAlign: "center" }}>{(idSum).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
 
-                                            <td id="color" style={{ textAlign: "center" }}>{(idSumTodayQty).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                                        <td id="color" style={{ textAlign: "center" }}>{(idSumTodayQty).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
 
-                                            <td id="color" style={{ textAlign: "center" }}>{(idSumYes).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                                        <td id="color" style={{ textAlign: "center" }}>{(idSumYes).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
 
-                                            <td id="color" style={{ textAlign: "center" }}>{(idSumYesQty).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                                        <td id="color" style={{ textAlign: "center" }}>{(idSumYesQty).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
 
-                                            <td id="color" style={{ textAlign: "center" }}>{(idSumMon).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                                        <td id="color" style={{ textAlign: "center" }}>{(idSumMon).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
 
-                                            <td id="color" style={{ textAlign: "center" }}>{(idSumMonQty).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                                        <td id="color" style={{ textAlign: "center" }}>{(idSumMonQty).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
 
-                                            <td id="color" style={{ textAlign: "center" }}>{(idSumpreMon).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                                        <td id="color" style={{ textAlign: "center" }}>{(idSumpreMon).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
 
-                                            <td id="color" style={{ textAlign: "center" }}>{(idSumpreMonQty).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                                        <td id="color" style={{ textAlign: "center" }}>{(idSumpreMonQty).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
 
-                                        </tr>
+                                    </tr>
 
-                                    </tfoot>
-                                </table>
+                                </tfoot>
+                            </table>
 
 
 
-                            
+
                         </div>
-                        <hr className="new1"/>
+                        <hr className="new1" />
                     </div>
 
                 </div>
             </div>
             {/* Chart */}
-            <div className='top ' >
-                <p className="text-center h4 ">CoBrand Wise Category Detail Report</p>
+          
+            <div className="LocationChart" id="MobNone">
 
-                <div className="container-fluid mb-3 mt-5 alig top2" >
-                    <Chart
-                        type="pie"
-                        width={300}
-                        height={320}
+                <PieChart highcharts={Highcharts} options={optionsMob} />
+            </div>
+            <div className="LocationChartMob" id="PcNone">
 
-                        series={CoBrandValueHook}
-
-                        options={{
-
-                            noData: { text: "Loading...." },
-                            // colors:["#f90000","#f0f"],
-                            colors: ['#5E667F', '#19B28E', '#5E667F', '#FFD72F', '#592975', '#71CC81', '#199AA3'],
-                            labels: CoBrandlabelHook,
-                            legend: {
-                              show: false
-                          },
-                     
-                          dataLabels: {
-                            enabled: true,
-                            textAnchor: 'middle',
-                              style:
-                                  { fontSize: '11px' ,fontWeight:'' , color:'#FFFFFF'},
-                              formatter: function (value, opts) {
-                                  return [opts.w.globals.labels[opts.seriesIndex] + '\n' + value.toFixed(1)+ '%']
-                              }
-                          },
-              
-              
-                      }}
-                    >
-                    </Chart>
-                </div>
+                <PieChart highcharts={Highcharts} options={options} />
             </div>
         </>
     )

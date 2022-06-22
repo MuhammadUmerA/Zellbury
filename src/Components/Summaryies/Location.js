@@ -1,11 +1,121 @@
 import React, { useState } from "react";
-import Chart from "react-apexcharts";
 import { CSVLink } from "react-csv";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import Loader from '../Loader'
+import Highcharts from "highcharts/highstock";
+import PieChart from "highcharts-react-official";
 
 
 function Location({ itemsLocation, isLoading, LocationLabelsHook, LocationValueHook }) {
+
+
+
+    const optionsMob = {
+
+        chart: {
+            innerHeight: 1000,
+            outerHeight: 1000,
+            innerWidth: 1000,
+            outerWidth: 1000,
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+
+        colors: ['#293462', '#216583', '#00818a', '#f7be16', '#454d66', '#009975', '#58b368', '#d9d872', '#ccc', '#aaa'],
+
+        title: {
+            text: 'Location Wise Category Detail Report'
+        },
+
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
+
+        },
+        //colors: ['#25749a', '#ee6c01', '#ee6c01'],
+
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+
+                    style: {
+                        fontSize: '7.5px',
+                    },
+
+                },
+                showInLegend: false
+            },
+
+        },
+
+
+        series: [
+            {
+                name: 'Location',
+                data: LocationLabelsHook
+            }],
+
+    };
+
+    const options = {
+
+        chart: {
+            innerHeight: 1000,
+            outerHeight: 1000,
+            innerWidth: 1000,
+            outerWidth: 1000,
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+
+        colors: ['#293462', '#216583', '#00818a', '#f7be16', '#454d66', '#009975', '#58b368', '#d9d872', '#ccc', '#aaa'],
+
+        title: {
+            text: 'Location Wise Category Detail Report'
+        },
+
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
+
+        },
+        //colors: ['#25749a', '#ee6c01', '#ee6c01'],
+
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+
+                    style: {
+                        fontSize: '11px',
+                    },
+
+                },
+                showInLegend: false
+            },
+
+        },
+
+
+        series: [
+            {
+                name: 'Location',
+                data: LocationLabelsHook
+            }],
+
+    };
+
     // Today
     let idSum = 0;
     let idSumYes = 0;
@@ -110,7 +220,7 @@ function Location({ itemsLocation, isLoading, LocationLabelsHook, LocationValueH
 
 
                 <div className="row">
-                    <div className="col-md-12 col-sm-12" >
+                    <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                         <div className="view">
 
                             <table className="table  table-hover table-bordered vertical-scrollable" id="Location-table-to-xls">
@@ -124,11 +234,11 @@ function Location({ itemsLocation, isLoading, LocationLabelsHook, LocationValueH
 
                                         <th className="coltm4">Monthly</th>
 
-                                        <th className="coltm4">Previous Month</th>
+                                        <th className="coltm4">Previous&nbsp;Month</th>
 
-                                        <th className="coltm4">Gross Sale</th>
+                                        <th className="coltm4">Gross&nbsp;Sale</th>
 
-                                        <th className="coltm4">GP Margin</th>
+                                        <th className="coltm4">GP&nbsp;Margin</th>
 
                                         <th className="coltm4">SQFeetYeild</th>
 
@@ -143,7 +253,7 @@ function Location({ itemsLocation, isLoading, LocationLabelsHook, LocationValueH
                                             <td className="sticky-col first-col">{item.locationName}</td>
 
 
-                                            <td className="text-center ind">{(item.today).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                                            <td className="text-center ind ">{(item.today).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
 
                                             <td className="text-center ind">{(item.yesterday).toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
 
@@ -183,7 +293,7 @@ function Location({ itemsLocation, isLoading, LocationLabelsHook, LocationValueH
                             </table>
 
                         </div>
-                            <hr className="new1"/>
+                        <hr className="new1" />
 
 
 
@@ -194,40 +304,14 @@ function Location({ itemsLocation, isLoading, LocationLabelsHook, LocationValueH
                 </div>
             </div>
             {/* Chart */}
-            <div className='top ' >
-                <p className="text-center h4 ">Location Wise Category Detail Report</p>
 
-                <div className="container-fluid mb-3 mt-5 alig top2 " >
-                    <Chart
-                        type="pie"
-                        width={300}
-                        height={320}
+            <div className="LocationChart" id="MobNone">
 
-                        series={LocationValueHook}
-                        options={{
+                <PieChart highcharts={Highcharts} options={optionsMob} />
+            </div>
+            <div className="LocationChartMob" id="PcNone">
 
-                            noData: { text: "Loading...." },
-                            // colors:["#f90000","#f0f"],
-                            colors: ['#5E667F', '#19B28E', '#5E667F', '#FFD72F', '#592975', '#71CC81', '#199AA3'],
-                            labels: LocationLabelsHook,
-                            legend: {
-                                show: false
-                            },
-
-                            dataLabels: {
-                                enabled: true,
-                                style:
-                                    { fontSize: '11px', color: '#FFFFFF' },
-                                formatter: function (value, opts) {
-                                    return [opts.w.globals.labels[opts.seriesIndex] + '\n' + value.toFixed(1) + '%']
-                                }
-                            },
-
-
-                        }}
-                    >
-                    </Chart>
-                </div>
+                <PieChart highcharts={Highcharts} options={options} />
             </div>
         </>
     )

@@ -237,15 +237,17 @@ function Dashboard() {
 
 
             for (let i = 0; i < result.data.length; i++) {
-                LocationLabels.push(result.data[i].locationName);
-                LocationValue.push(parseInt(result.data[i].monthly));
+                LocationLabels.push({ name: result.data[i].locationName, y: parseInt(result.data[i].monthly) });
+                // LocationValue.push();
             }
+            console.log(LocationLabels);
             setLocationLabelsHook(LocationLabels);
             setLocationValueHook(LocationValue);
             // console.log(LocationValueHook);
             setItemsLocation(result.data)//sets the data to appear 
             setLoading(false)
         }
+
         getLocationSummary()
         //Category
 
@@ -258,8 +260,8 @@ function Dashboard() {
 
             setItemsCategory(result.data)//sets the data to appear 
             for (let i = 0; i < result.data.length; i++) {
-                Categorylabel.push(result.data[i].categoryName);
-                CategoryValue.push(parseInt(result.data[i].monthly));
+                Categorylabel.push({name:result.data[i].categoryName,y:parseInt(result.data[i].monthly)});
+                CategoryValue.push();
             }
             setCategorylabelHook(Categorylabel);
             setCategoryValueHook(CategoryValue);
@@ -283,7 +285,7 @@ function Dashboard() {
 
 
             for (let i = 0; i < result.data.length; i++) {
-                CoBrandlabel.push(result.data[i].coBrand);
+                CoBrandlabel.push({name:result.data[i].coBrand,y:parseInt(result.data[i].monthly)});
                 CoBrandValue.push(parseInt(result.data[i].monthly));
             }
             setCoBrandlabelHook(CoBrandlabel);
@@ -304,7 +306,7 @@ function Dashboard() {
             setItemsDepartment(result.data)//sets the data to appear
 
             for (let i = 0; i < result.data.length; i++) {
-                Departmentlabel.push(result.data[i].departmentName);
+                Departmentlabel.push({name:result.data[i].departmentName,y:parseInt(result.data[i].monthly)});
                 DepartmentValue.push(parseInt(result.data[i].monthly));
             }
             setDepartmentlabelHook(Departmentlabel);
@@ -327,7 +329,7 @@ function Dashboard() {
 
 
             for (let i = 0; i < result.data.length; i++) {
-                Productionlabel.push(result.data[i].attribute2Name);
+                Productionlabel.push({name:result.data[i].attribute2Name,y:parseInt(result.data[i].monthly)});
                 ProductionValue.push(parseInt(result.data[i].monthly));
             }
             setProductionlabelHook(Productionlabel);
@@ -766,7 +768,6 @@ function Dashboard() {
                                                 <div className="text-center flex-grow">
                                                     <button id="btnFilter" className="btn btn-sm btn-primary" onClick={Filter}>Apply Filter</button>
                                                     {/* <button id="btnFilterDetail" className="btn btn-sm btn-primary" style={{ display: 'none' }} >Apply</button> */}
-
                                                 </div>
                                             </div>
                                         </div>
@@ -774,7 +775,6 @@ function Dashboard() {
                                 </div>
                                 {/* Filters */}
                                 <div className="f5">
-
                                     <div className="contaiin bot mb-5">
                                         <BlueBox isLoading={isLoading} blueBoxData={blueBoxData} />
                                     </div>

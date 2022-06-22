@@ -15,6 +15,9 @@ body {
 
 
 @media screen and (max-width: 480px) {
+  .LocationChartMob {
+    zoom: 130% !important;
+  }
 
   .m-mob {
     margin-bottom: 7px !important;
@@ -164,6 +167,9 @@ small {
 }
 
 @media screen and (min-width: 480px) {
+  .LocationChart {
+    zoom: 125% !important;
+  }
 
   #MobNone {
     display: none;
@@ -172,8 +178,6 @@ small {
   .MobNone {
     display: none;
   }
-
-
 
   /*  Total */
   .ov {
@@ -437,21 +441,25 @@ tr:first-child {
   height: 20px;
   background-color: #3E8EF7;
 }
+
 .TodayTotal {
   width: 330px;
   height: 20px;
   background-color: aqua;
 }
+
 .YesterdayTotal {
   width: 330px;
   height: 20px;
   background-color: brown;
 }
+
 .LocationTotal {
   width: 330px;
   height: 20px;
   background-color: #3E8EF7;
 }
+
 hr.new1 {
   position: relative;
   bottom: 73px;

@@ -97,7 +97,7 @@ function Summary({ items, isLoading, previousYearMonthnetSale, monthlynetSale })
 
 
 
-                    </div>  
+                    </div>
                     <div className="mt-5"></div>
                     <div className="viewSalesSummary">
                         <div className="wrapperSalesSummary">
@@ -229,6 +229,7 @@ function Summary({ items, isLoading, previousYearMonthnetSale, monthlynetSale })
                             series={[
                                 {
                                     data: [previousYearMonthnetSale, monthlynetSale],
+                                    // color:'#04fad6'  
                                 },
                             ]}
                             options={{
