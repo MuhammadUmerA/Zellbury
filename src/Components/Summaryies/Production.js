@@ -5,7 +5,7 @@ import Loader from '../Loader'
 import Highcharts from "highcharts/highstock";
 import PieChart from "highcharts-react-official";
 
-function Production({ isLoading, itemsProduction, ProductionValueHook, ProductionlabelHook }) {
+function Production({ isLoading, itemsProduction, ProductionlabelHook }) {
 
     
 

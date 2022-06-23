@@ -67,7 +67,6 @@ function Dashboard() {
     // chart for summaries
     // LOCATION  SUMMARY
     const [LocationLabelsHook, setLocationLabelsHook] = useState([]);
-    const [LocationValueHook, setLocationValueHook] = useState([]);
 
     //SALES
 
@@ -75,22 +74,22 @@ function Dashboard() {
     const [monthlynetSale, setMonthlynetSale] = useState("");
 
     // CATEGORY SUMMARY
-    const [CategoryValueHook, setCategoryValueHook] = useState([]);
+
     const [CategorylabelHook, setCategorylabelHook] = useState([]);
 
     //CO BRAND
-    const [CoBrandValueHook, setCoBrandValueHook] = useState([]);
+
     const [CoBrandlabelHook, setCoBrandlabelHook] = useState([]);
 
     //DEPARTMENT
 
-    const [DepartmentValueHook, setDepartmentValueHook] = useState([]);
+
     const [DepartmentlabelHook, setDepartmentlabelHook] = useState([]);
 
 
     // PRODUCTION YEAR 
 
-    const [ProductionValueHook, setProductionValueHook] = useState([]);
+
     const [ProductionlabelHook, setProductionlabelHook] = useState([]);
 
 
@@ -172,21 +171,17 @@ function Dashboard() {
 
         // constants for chart 
         let LocationLabels = [];
-        let LocationValue = [];
+
         // Category
         let Categorylabel = [];
-        let CategoryValue = [];
         //coobarnd
         let CoBrandlabel = [];
-        let CoBrandValue = [];
         //DEPARTMENT
         let Departmentlabel = [];
-        let DepartmentValue = [];
 
         // PRODUCTION
-
         let Productionlabel = [];
-        let ProductionValue = [];
+
 
         // Blue Box  
 
@@ -240,9 +235,9 @@ function Dashboard() {
                 LocationLabels.push({ name: result.data[i].locationName, y: parseInt(result.data[i].monthly) });
                 // LocationValue.push();
             }
-            console.log(LocationLabels);
+
             setLocationLabelsHook(LocationLabels);
-            setLocationValueHook(LocationValue);
+
             // console.log(LocationValueHook);
             setItemsLocation(result.data)//sets the data to appear 
             setLoading(false)
@@ -256,17 +251,12 @@ function Dashboard() {
                 `https://posapi.gtech.com.pk/api/post/CategorySummary?api=qTpq3bVFho&DateFrom=${MounthDate}&dateTo=${date}&Region=${valRegion}&Location=${valLocation}
                 &Category=${valCategory}&Department=${valDepartment}&CoBrand=${value}&Channel=${valChannel}`
             )
-
-
             setItemsCategory(result.data)//sets the data to appear 
             for (let i = 0; i < result.data.length; i++) {
-                Categorylabel.push({name:result.data[i].categoryName,y:parseInt(result.data[i].monthly)});
-                CategoryValue.push();
+                Categorylabel.push({ name: result.data[i].categoryName, y: parseInt(result.data[i].monthly) });
             }
             setCategorylabelHook(Categorylabel);
-            setCategoryValueHook(CategoryValue);
             setLoading(false)
-
         }
         getItemsCategory()
 
@@ -285,11 +275,11 @@ function Dashboard() {
 
 
             for (let i = 0; i < result.data.length; i++) {
-                CoBrandlabel.push({name:result.data[i].coBrand,y:parseInt(result.data[i].monthly)});
-                CoBrandValue.push(parseInt(result.data[i].monthly));
+                CoBrandlabel.push({ name: result.data[i].coBrand, y: parseInt(result.data[i].monthly) });
+
             }
             setCoBrandlabelHook(CoBrandlabel);
-            setCoBrandValueHook(CoBrandValue);
+
             setLoading(false)
 
 
@@ -306,11 +296,11 @@ function Dashboard() {
             setItemsDepartment(result.data)//sets the data to appear
 
             for (let i = 0; i < result.data.length; i++) {
-                Departmentlabel.push({name:result.data[i].departmentName,y:parseInt(result.data[i].monthly)});
-                DepartmentValue.push(parseInt(result.data[i].monthly));
+                Departmentlabel.push({ name: result.data[i].departmentName, y: parseInt(result.data[i].monthly) });
+
             }
             setDepartmentlabelHook(Departmentlabel);
-            setDepartmentValueHook(DepartmentValue);
+
             setLoading(false)
 
         }
@@ -329,11 +319,11 @@ function Dashboard() {
 
 
             for (let i = 0; i < result.data.length; i++) {
-                Productionlabel.push({name:result.data[i].attribute2Name,y:parseInt(result.data[i].monthly)});
-                ProductionValue.push(parseInt(result.data[i].monthly));
+                Productionlabel.push({ name: result.data[i].attribute2Name, y: parseInt(result.data[i].monthly) });
+
             }
             setProductionlabelHook(Productionlabel);
-            setProductionValueHook(ProductionValue);
+
             setLoading(false)
 
             // console.log(ProductionValue);
@@ -482,9 +472,9 @@ function Dashboard() {
 
         // session over
 
-        // setTimeout(() => {
-        //     navigate('/Login');
-        // }, 2280000);
+        setTimeout(() => {
+            navigate('/Login');
+        }, 2280000);
 
 
 
@@ -803,22 +793,22 @@ function Dashboard() {
                                     <div className={toggleState === 1 ? "content-active" : "content-inactive"}>
                                         <h4 className='mt-4'>Location Summary</h4>
                                         <hr className="mx-1" />
-                                        <Location isLoading={isLoading} itemsLocation={itemsLocation} LocationLabelsHook={LocationLabelsHook} LocationValueHook={LocationValueHook} />
+                                        <Location isLoading={isLoading} itemsLocation={itemsLocation} LocationLabelsHook={LocationLabelsHook} />
                                     </div>
                                     <div className={toggleState === 2 ? "content-active" : "content-inactive"}>
                                         <Region />
                                     </div>
                                     <div className={toggleState === 3 ? "content-active" : "content-inactive"}>
-                                        <CoBrand isLoading={isLoading} itemsCoBrand={itemsCoBrand} CoBrandValueHook={CoBrandValueHook} CoBrandlabelHook={CoBrandlabelHook} />
+                                        <CoBrand isLoading={isLoading} itemsCoBrand={itemsCoBrand} CoBrandlabelHook={CoBrandlabelHook} />
                                     </div>
                                     <div className={toggleState === 4 ? "content-active" : "content-inactive"}>
-                                        <Department isLoading={isLoading} itemsDepartment={itemsDepartment} DepartmentValueHook={DepartmentValueHook} DepartmentlabelHook={DepartmentlabelHook} />
+                                        <Department isLoading={isLoading} itemsDepartment={itemsDepartment} DepartmentlabelHook={DepartmentlabelHook} />
                                     </div>
                                     <div className={toggleState === 5 ? "content-active" : "content-inactive"}>
-                                        <Category isLoading={isLoading} itemsCategory={itemsCategory} CategoryValueHook={CategoryValueHook} CategorylabelHook={CategorylabelHook} />
+                                        <Category isLoading={isLoading} itemsCategory={itemsCategory} CategorylabelHook={CategorylabelHook} />
                                     </div>
                                     <div className={toggleState === 6 ? "content-active" : "content-inactive"}>
-                                        <Production isLoading={isLoading} itemsProduction={itemsProduction} ProductionValueHook={ProductionValueHook} ProductionlabelHook={ProductionlabelHook} />
+                                        <Production isLoading={isLoading} itemsProduction={itemsProduction} ProductionlabelHook={ProductionlabelHook} />
                                     </div>
                                     <div className={toggleState === 7 ? "content-active" : "content-inactive"}>
                                         <Top />

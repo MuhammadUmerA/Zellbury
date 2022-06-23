@@ -5,7 +5,7 @@ import Loader from '../Loader'
 import Highcharts from "highcharts/highstock";
 import PieChart from "highcharts-react-official";
 
-function CoBrand({ isLoading, itemsCoBrand, CoBrandlabelHook, CoBrandValueHook }) {
+function CoBrand({ isLoading, itemsCoBrand, CoBrandlabelHook }) {
     const optionsMob = {
 
         chart: {
@@ -93,7 +93,7 @@ function CoBrand({ isLoading, itemsCoBrand, CoBrandlabelHook, CoBrandValueHook }
                     format: '<b>{point.name}</b>: {point.percentage:.1f} %',
 
                     style: {
-                        fontSize: '10px',
+                        fontSize: '11px',
                     },
 
                 },

@@ -5,7 +5,7 @@ import Loader from '../Loader'
 import Highcharts from "highcharts/highstock";
 import PieChart from "highcharts-react-official";
 
-function Category({ itemsCategory, isLoading, CategoryValueHook, CategorylabelHook }) {
+function Category({ itemsCategory, isLoading,  CategorylabelHook }) {
    
     const options = {
 

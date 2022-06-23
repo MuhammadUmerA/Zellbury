@@ -5,7 +5,7 @@ import Loader from '../Loader'
 import Highcharts from "highcharts/highstock";
 import PieChart from "highcharts-react-official";
 
-function Department({ isLoading, itemsDepartment, DepartmentValueHook, DepartmentlabelHook }) {
+function Department({ isLoading, itemsDepartment,  DepartmentlabelHook }) {
   
   const options = {
 
