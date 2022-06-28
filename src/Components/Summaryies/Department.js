@@ -5,15 +5,11 @@ import Loader from '../Loader'
 import Highcharts from "highcharts/highstock";
 import PieChart from "highcharts-react-official";
 
-function Department({ isLoading, itemsDepartment,  DepartmentlabelHook }) {
-  
+function Department({ isLoading, itemsDepartment, DepartmentlabelHook }) {
+
   const options = {
 
     chart: {
-      innerHeight: 1000,
-      outerHeight: 1000,
-      innerWidth: 1000,
-      outerWidth: 1000,
       plotBackgroundColor: null,
       plotBorderWidth: null,
       plotShadow: false,
@@ -142,7 +138,7 @@ function Department({ isLoading, itemsDepartment,  DepartmentlabelHook }) {
 
     setTimeout(() => {
       setCopyModal('Hiding');
-    }, 2300);
+    }, 2100);
   }
   const CopyModalData = itemsDepartment.length;
   return isLoading ? (   //Checkif if is loading
@@ -280,7 +276,7 @@ function Department({ isLoading, itemsDepartment,  DepartmentlabelHook }) {
 
         <PieChart highcharts={Highcharts} options={options} />
       </div>
-      
+
     </>
   )
 

@@ -9,7 +9,7 @@ const BlueBox = ({ isLoading, blueBoxData }) => {
         <Loader />
     ) : (
         <>
-            {blueBoxData.map((item, index) => (
+            {blueBoxData.map((item ) => (
                 < div className="row" key={item._todaySale}>
                     <div className="col-xl-4 col-12">
 

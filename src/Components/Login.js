@@ -5,7 +5,7 @@ import zellbury from '../images/OrientLogo.png';
 import gtech from '../images/logo.png'
 
 
-function Form() {
+function Form(props) {
 
     const current = new Date();
     const currentYear = current.getFullYear();
@@ -18,6 +18,13 @@ function Form() {
     const [passwordInput, setPasswordInput] = useState("");
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+
+    const [authState, setAuthState] = useState("NotLoggedIn");
+
+
+
+
+
 
     const handleEmailChange = (e) => {
         setEmailInput(e.target.value);
@@ -47,14 +54,17 @@ function Form() {
                     //console.log(data);
                     if (data === 'Login Successfully') {
                         setSuccessMessage('Login Successfully')
+                        let word = "true";
+                        setAuthState("LoggedIn");
+                        props.func(word);
 
-                        navigate('/Dashboard')
+                        navigate('/Dashboard');
                     }
                     else {
                         setErrorMessage('Invalid Login.')
                         setTimeout(() => {
                             setErrorMessage('')
-                        }, 3500);
+                        }, 3100);
                         setEmailInput('')
                         setPasswordInput('')
                     }
@@ -135,7 +145,7 @@ function Form() {
                                             </div>
 
                                             <br />
-                                            <div style={{display:'flex', alignItems:'center',justifyContent:'space-between'}}>
+                                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                                 <div className="label " style={{ color: 'white', fontWeight: 600, fontFamily: 'Calibri', fontSize: '13px', marginTop: '10px' }} id="copyrightOutput">© {currentYear}-{nextYear}  AL RAHIM RETAIL LTD</div>
                                                 <span className="light-logo"><img src={gtech} width="100px" alt="logo" /></span>
 

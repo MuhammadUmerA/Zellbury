@@ -13,7 +13,12 @@ import Category from "./Summaryies/Category";
 import Production from "./Summaryies/Production";
 import Top from "./Summaryies/Top";
 
-function Dashboard() {
+function Dashboard(props) {
+    const navigate = useNavigate();
+    if (props.datae != "true") {
+        navigate('/Login');
+
+    }
     //back to top 
     const scrollToTop = () => {
         window.scrollTo({
@@ -23,21 +28,16 @@ function Dashboard() {
     };
 
     // Tabs
-
     const [toggleState, setToggleState] = useState(1);
-
     const toggleTab = (index) => {
         setToggleState(index);
     }
-
     //  date
     const current = new Date();
     const date = `${current.getMonth() + 1}/${current.getDate()}/${current.getFullYear()}`;
     const MounthDate = `${current.getMonth()}/01/${current.getFullYear()}`;
     const currentYear = current.getFullYear();
     const nextYear = current.getFullYear() + 1;
-
-
     // Hooks For Fetching Data
 
     const [isLoading, setLoading] = useState(true)
@@ -73,28 +73,14 @@ function Dashboard() {
     const [previousYearMonthnetSale, setPreviousYearMonthnetSale] = useState("");
     const [monthlynetSale, setMonthlynetSale] = useState("");
 
-    // CATEGORY SUMMARY
-
     const [CategorylabelHook, setCategorylabelHook] = useState([]);
-
-    //CO BRAND
-
     const [CoBrandlabelHook, setCoBrandlabelHook] = useState([]);
-
-    //DEPARTMENT
-
-
     const [DepartmentlabelHook, setDepartmentlabelHook] = useState([]);
-
-
-    // PRODUCTION YEAR 
-
-
     const [ProductionlabelHook, setProductionlabelHook] = useState([]);
 
 
     // Logout
-    const navigate = useNavigate();
+
 
     const logout = () => {
         navigate('/Login');
@@ -102,9 +88,10 @@ function Dashboard() {
     //
     // auto refresh start
     const [show, setShow] = useState(true);
-
+    let MINUTE_MS = 120000;
     const handleClick = () => {
         setShow(s => !s);
+        MINUTE_MS = 120000000;
     };
 
 
@@ -331,7 +318,10 @@ function Dashboard() {
         getItemsProductionYear()
     }
 
+
+
     useEffect(() => {
+
         Filter();
         // filters
         // Region
@@ -403,81 +393,23 @@ function Dashboard() {
         }
         getCoBrand()
 
-        // auto refresh
-
-        if (!show) {
-            setTimeout(() => {
-                Filter();
-            }, 600000000);
-        }
-        if (show) {
-            setTimeout(() => {
-                Filter();
-            }, 120000);
-            setTimeout(() => {
-                Filter();
-            }, 240000);
-            setTimeout(() => {
-                Filter();
-            }, 360000);
-            setTimeout(() => {
-                Filter();
-            }, 480000);
-            setTimeout(() => {
-                Filter();
-            }, 600000);
-            setTimeout(() => {
-                Filter();
-            }, 720000);
-            setTimeout(() => {
-                Filter();
-            }, 840000);
-            setTimeout(() => {
-                Filter();
-            }, 960000);
-            setTimeout(() => {
-                Filter();
-            }, 1080000);
-            setTimeout(() => {
-                Filter();
-            }, 1200000);
-            setTimeout(() => {
-                Filter();
-            }, 1320000);
-            setTimeout(() => {
-                Filter();
-            }, 1440000);
-            setTimeout(() => {
-                Filter();
-            }, 1560000);
-            setTimeout(() => {
-                Filter();
-            }, 1680000);
-            setTimeout(() => {
-                Filter();
-            }, 1800000);
-            setTimeout(() => {
-                Filter();
-            }, 1920000);
-            setTimeout(() => {
-                Filter();
-            }, 2040000);
-            setTimeout(() => {
-                Filter();
-            }, 2160000);
-            setTimeout(() => {
-                Filter();
-            }, 2280000);
-        }
-
         // session over
 
         setTimeout(() => {
             navigate('/Login');
         }, 2280000);
 
+        // auto refresh
+        const interval = setInterval(() => {
+            Filter();
+        }, MINUTE_MS);
 
 
+
+        if (!show) {
+
+            return () => clearInterval(interval);
+        }
     }, [])//when we use useEffect we put dependency as a second paramers
 
 
@@ -495,6 +427,7 @@ function Dashboard() {
         SetApiToDefault();
         Filter();
     }
+
     return (
         <>
             <div className="skin-info dark-sidebar sidebar-mini pace-done sidebar-collapse dashboardWidth">

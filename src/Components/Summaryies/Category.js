@@ -10,10 +10,6 @@ function Category({ itemsCategory, isLoading,  CategorylabelHook }) {
     const options = {
 
         chart: {
-            innerHeight: 1000,
-            outerHeight: 1000,
-            innerWidth: 1000,
-            outerWidth: 1000,
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false,
