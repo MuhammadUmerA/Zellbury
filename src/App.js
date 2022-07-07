@@ -8,22 +8,12 @@ import {
   Route
 } from "react-router-dom";
 
-
-
 function App(props) {
   const [toggleStat, setToggleStat] = useState("");
-  // const [auth, setAuth] = useState("");
-
-  // useEffect(() => {
-
     const pull_data = (data) => {
-      console.log(data); // LOGS DATA FROM CHILD (My name is Dean Winchester... &)
+      console.log(data); 
       setToggleStat(data)
-
-      // setAuth(data)
     }
-  // }, [])
-
   return (
 
     <>

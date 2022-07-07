@@ -15,10 +15,18 @@ import Top from "./Summaryies/Top";
 
 function Dashboard(props) {
     const navigate = useNavigate();
-    if (props.datae != "true") {
-        navigate('/Login');
 
+
+    const rememberMe = sessionStorage.getItem('SignedIn') === 'SignedIn';
+
+    if (!rememberMe) {
+        navigate('/Login');
     }
+
+    // if (props.datae != "true") {
+    //     navigate('/Login');
+    // }
+
     //back to top 
     const scrollToTop = () => {
         window.scrollTo({

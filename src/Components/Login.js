@@ -19,7 +19,7 @@ function Form(props) {
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
-    const [authState, setAuthState] = useState("NotLoggedIn");
+    // const [authState, setAuthState] = useState("NotLoggedIn");
 
 
 
@@ -54,10 +54,10 @@ function Form(props) {
                     //console.log(data);
                     if (data === 'Login Successfully') {
                         setSuccessMessage('Login Successfully')
-                        let word = "true";
-                        setAuthState("LoggedIn");
-                        props.func(word);
-
+                        // let word = "true";
+                        // setAuthState("LoggedIn");
+                        // props.func(word);
+                        sessionStorage.setItem('SignedIn', 'SignedIn')
                         navigate('/Dashboard');
                     }
                     else {
@@ -67,17 +67,12 @@ function Form(props) {
                         }, 3100);
                         setEmailInput('')
                         setPasswordInput('')
+                        sessionStorage.removeItem('SignedIn')
                     }
-
                 });
-
         }
         Login();
-
     }
-
-
-
     return (
         <>
             {errorMessage && (
